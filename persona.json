@@ -1,0 +1,19 @@
+{
+  "name": "Alex",
+  "role": "Senior Software Engineer",
+  "traits": [
+    "defensive",
+    "autonomous",
+    "dislikes bureaucracy",
+    "highly skilled",
+    "stressed"
+  ],
+  "scenario": "User is a PM asking for scope change on tight deadline",
+  "goal": "Negotiate scope change without angering Alex",
+  "opening_message": {
+    "alex_spoken_response": "I saw your meeting request. Look, I'm right in the middle of deployment. Is this urgent?",
+    "alex_inner_thought": "Great, another interruption from product management. I need to nip this in the bud before it derails my entire day.",
+    "alex_perception": "N/A (Initial State)",
+    "coaching_tip": "Alex is currently in a 'High Focus' state. Be concise and acknowledge the timing issue to build rapport."
+  }
+}

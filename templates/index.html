@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Difficult Conversations</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="sticky-header">
+        <div class="header-content">
+            <div class="header-left">
+                <h3 class="brand-title">🎯 Difficult Conversations</h3>
+            </div>
+            <select id="scenario-dropdown" class="scenario-dropdown">
+                <option value="scope-change" selected>Scope Change Under Pressure</option>
+                <option value="deadline">Deadline Negotiation</option>
+                <option value="resource">Resource Conflict</option>
+            </select>
+            <div class="header-right">
+                <div class="progress-widget">
+                    <span class="progress-widget-label">Progress</span>
+                    <div class="progress-widget-bar">
+                        <div id="progress-fill" class="progress-widget-fill" style="width: 0%"></div>
+                    </div>
+                    <span id="progress-percentage" class="progress-widget-percentage">0%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="timeline-container">
+        <div id="chat-timeline" class="chat-timeline">
+        </div>
+    </div>
+
+    <div class="sticky-footer">
+        <div class="footer-content">
+            <textarea 
+                id="user-input" 
+                placeholder="Loading..." 
+                rows="2"
+            ></textarea>
+            <button id="send-btn" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
