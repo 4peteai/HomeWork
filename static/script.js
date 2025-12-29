@@ -83,21 +83,39 @@ function showInsightTooltip(event, text) {
         tooltip.id = 'insight-tooltip';
         tooltip.className = 'insight-tooltip';
         document.body.appendChild(tooltip);
+        
+        tooltip.addEventListener('click', function() {
+            hideInsightTooltip();
+        });
     }
     
     tooltip.innerHTML = text;
     tooltip.style.display = 'block';
     
-    const iconRect = event.target.getBoundingClientRect();
-    const tooltipWidth = 250;
-    tooltip.style.left = (iconRect.left + iconRect.width / 2 - tooltipWidth / 2) + 'px';
-    tooltip.style.top = (iconRect.top - tooltip.offsetHeight - 10) + 'px';
+    if (window.innerWidth <= 768) {
+        tooltip.style.left = '0';
+        tooltip.style.top = '0';
+    } else {
+        const iconRect = event.target.getBoundingClientRect();
+        const tooltipWidth = 250;
+        tooltip.style.left = (iconRect.left + iconRect.width / 2 - tooltipWidth / 2) + 'px';
+        tooltip.style.top = (iconRect.top - tooltip.offsetHeight - 10) + 'px';
+    }
 }
 
 function hideInsightTooltip() {
     const tooltip = document.getElementById('insight-tooltip');
     if (tooltip) {
         tooltip.style.display = 'none';
+    }
+}
+
+function toggleInsightTooltip(event, text) {
+    const tooltip = document.getElementById('insight-tooltip');
+    if (tooltip && tooltip.style.display === 'block') {
+        hideInsightTooltip();
+    } else {
+        showInsightTooltip(event, text);
     }
 }
 
@@ -114,6 +132,7 @@ function addUserMessageCard(text, perception = null, coachingTip = null, directo
         const tooltipContent = directorWarning ? directorWarning + '<br><br>' + coachingTip : coachingTip;
         insightIcon.onmouseenter = (e) => showInsightTooltip(e, tooltipContent);
         insightIcon.onmouseleave = hideInsightTooltip;
+        insightIcon.onclick = (e) => toggleInsightTooltip(e, tooltipContent);
         turn.appendChild(insightIcon);
     }
     
@@ -219,8 +238,14 @@ async function sendMessage() {
     updateInputPlaceholder();
     
     isWaitingForResponse = true;
-    document.getElementById('send-btn').disabled = true;
-    document.getElementById('send-btn').textContent = 'Thinking...';
+    const sendBtn = document.getElementById('send-btn');
+    sendBtn.disabled = true;
+    const sendBtnText = sendBtn.querySelector('.send-btn-text');
+    if (sendBtnText) {
+        sendBtnText.textContent = 'Thinking...';
+    } else {
+        sendBtn.textContent = 'Thinking...';
+    }
     
     showLoading();
     
@@ -275,6 +300,7 @@ async function sendMessage() {
             const tooltipContent = data.director_warning ? data.director_warning + '<br><br>' + data.coaching_tip : data.coaching_tip;
             insightIcon.onmouseenter = (e) => showInsightTooltip(e, tooltipContent);
             insightIcon.onmouseleave = hideInsightTooltip;
+            insightIcon.onclick = (e) => toggleInsightTooltip(e, tooltipContent);
             lastUserTurn.insertBefore(insightIcon, lastUserTurn.firstChild);
         }
         
@@ -292,8 +318,14 @@ async function sendMessage() {
         alert('Failed to send message. Please try again.');
     } finally {
         isWaitingForResponse = false;
-        document.getElementById('send-btn').disabled = false;
-        document.getElementById('send-btn').textContent = 'Send';
+        const sendBtn = document.getElementById('send-btn');
+        sendBtn.disabled = false;
+        const sendBtnText = sendBtn.querySelector('.send-btn-text');
+        if (sendBtnText) {
+            sendBtnText.textContent = 'Send';
+        } else {
+            sendBtn.textContent = 'Send';
+        }
         input.focus();
     }
 }

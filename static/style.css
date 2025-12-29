@@ -434,43 +434,82 @@ body {
 
 @media (max-width: 768px) {
     .sticky-header {
-        padding: 16px 20px;
+        padding: 12px 16px;
     }
     
     .header-content {
-        grid-template-columns: 1fr;
-        gap: 16px;
+        grid-template-columns: auto auto 1fr;
+        gap: 12px;
+        align-items: center;
     }
     
     .header-left {
-        justify-self: center;
+        justify-self: start;
     }
     
     .brand-title {
-        font-size: 16px;
-        text-align: center;
+        font-size: 14px;
+        font-weight: 500;
+        white-space: nowrap;
     }
     
     .scenario-dropdown {
-        font-size: 13px;
-        padding: 7px 28px 7px 16px;
+        width: 40px;
+        height: 40px;
+        font-size: 0;
+        padding: 0;
+        border-radius: 50%;
+        justify-self: start;
+        background-position: center;
+        background-size: 14px;
+    }
+    
+    .scenario-dropdown option {
+        font-size: 14px;
+    }
+    
+    .scenario-dropdown option:not(:first-child) {
+        opacity: 0.5;
+        color: var(--text-secondary);
+    }
+    
+    .scenario-dropdown option:not(:first-child)::after {
+        content: ' (Coming Soon)';
+        font-size: 11px;
+        font-style: italic;
     }
     
     .header-right {
-        justify-self: center;
+        justify-self: end;
+        width: auto;
+        flex: 1;
     }
     
     .progress-widget {
+        width: 100%;
         gap: 8px;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 6px 10px;
+        border-radius: 6px;
+    }
+    
+    .progress-widget-label {
+        font-size: 10px;
     }
     
     .progress-widget-bar {
-        width: 80px;
+        flex: 1;
+        height: 4px;
+    }
+    
+    .progress-widget-percentage {
+        font-size: 11px;
+        min-width: 28px;
     }
     
     .timeline-container {
-        top: 120px;
-        bottom: 100px;
+        top: 92px;
+        bottom: 90px;
     }
     
     .chat-timeline {
@@ -487,22 +526,51 @@ body {
         font-size: 13px;
     }
     
+    .message-turn {
+        gap: 8px;
+    }
+    
+    .user-turn {
+        max-width: 90%;
+    }
+    
+    .alex-turn {
+        max-width: 90%;
+    }
+    
     .sticky-footer {
-        bottom: 16px;
+        bottom: 12px;
     }
     
     .footer-content {
-        padding: 10px 16px;
-        max-width: calc(100% - 32px);
+        padding: 8px 12px;
+        max-width: calc(100% - 24px);
+        gap: 8px;
     }
     
     #user-input {
-        font-size: 14px;
+        font-size: 16px;
+        padding: 6px 4px;
     }
     
     #send-btn {
-        padding: 7px 20px;
-        font-size: 13px;
+        min-width: 44px;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        font-size: 18px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    #send-btn::before {
+        content: '➤';
+    }
+    
+    .send-btn-text {
+        display: none;
     }
     
     .user-bubble {
@@ -515,6 +583,7 @@ body {
     
     .whisper-text {
         font-size: 13px;
+        margin-top: 6px;
     }
     
     .alex-avatar {
@@ -524,8 +593,20 @@ body {
     }
     
     .insight-tooltip {
-        font-size: 12px;
-        max-width: 240px;
-        padding: 10px 14px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
+        border: none;
+        border-bottom: 2px solid var(--accent-color);
+        background: var(--bg-surface);
+        font-size: 13px;
+        padding: 16px 20px;
+        z-index: 200;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
+        transform: none;
     }
 }
