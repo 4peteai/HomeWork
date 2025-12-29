@@ -434,11 +434,12 @@ body {
 
 @media (max-width: 768px) {
     .sticky-header {
-        padding: 12px 16px;
+        padding: 12px 16px 16px 16px;
+        position: relative;
     }
     
     .header-content {
-        grid-template-columns: auto auto 1fr;
+        grid-template-columns: 1fr auto;
         gap: 12px;
         align-items: center;
     }
@@ -448,20 +449,20 @@ body {
     }
     
     .brand-title {
-        font-size: 14px;
+        font-size: 15px;
         font-weight: 500;
         white-space: nowrap;
     }
     
     .scenario-dropdown {
-        width: 40px;
-        height: 40px;
+        width: 36px;
+        height: 36px;
         font-size: 0;
         padding: 0;
         border-radius: 50%;
-        justify-self: start;
+        justify-self: end;
         background-position: center;
-        background-size: 14px;
+        background-size: 12px;
     }
     
     .scenario-dropdown option {
@@ -480,35 +481,38 @@ body {
     }
     
     .header-right {
-        justify-self: end;
-        width: auto;
-        flex: 1;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
     }
     
     .progress-widget {
         width: 100%;
-        gap: 8px;
-        background: rgba(255, 255, 255, 0.03);
-        padding: 6px 10px;
-        border-radius: 6px;
+        gap: 0;
+        background: transparent;
+        padding: 0;
+        border-radius: 0;
     }
     
     .progress-widget-label {
-        font-size: 10px;
+        display: none;
     }
     
     .progress-widget-bar {
         flex: 1;
-        height: 4px;
+        height: 3px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 0;
     }
     
     .progress-widget-percentage {
-        font-size: 11px;
-        min-width: 28px;
+        display: none;
     }
     
     .timeline-container {
-        top: 92px;
+        top: 64px;
         bottom: 90px;
     }
     
