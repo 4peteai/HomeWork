@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Instructions</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            line-height: 1.6;
+            background: #1a1a1a;
+            color: #e0e0e0;
+        }
+        h1 { color: #7da3d3; }
+        h2 { color: #96b8e8; margin-top: 30px; }
+        code {
+            background: #2a2a2a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', monospace;
+        }
+        pre {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 3px solid #7da3d3;
+        }
+        .step {
+            background: #252525;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 3px solid #4CAF50;
+        }
+        .important {
+            background: #3a2a2a;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 3px solid #f44336;
+        }
+        a {
+            color: #7da3d3;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Debug Instructions - LLM Silent Issue</h1>
+    
+    <p>I've added extensive debug logging to help identify why Alex isn't responding. Follow these steps:</p>
+    
+    <h2>Step 1: Open Browser Developer Console</h2>
+    <div class="step">
+        <p><strong>Chrome/Safari:</strong></p>
+        <ul>
+            <li>Press <code>Cmd + Option + I</code> (Mac) or <code>F12</code> (Windows/Linux)</li>
+            <li>Or right-click anywhere on the page → "Inspect" → Click "Console" tab</li>
+        </ul>
+    </div>
+    
+    <h2>Step 2: Clear Browser Cache</h2>
+    <div class="step">
+        <p>The browser may be caching old JavaScript files. Clear the cache:</p>
+        <ul>
+            <li><strong>Hard Reload:</strong> Press <code>Cmd + Shift + R</code> (Mac) or <code>Ctrl + Shift + R</code> (Windows/Linux)</li>
+            <li>Or in Chrome: Right-click the refresh button → "Empty Cache and Hard Reload"</li>
+        </ul>
+    </div>
+    
+    <h2>Step 3: Load the Application</h2>
+    <div class="step">
+        <p>Navigate to: <a href="http://localhost:8000/scenario/friday-favor" target="_blank">http://localhost:8000/scenario/friday-favor</a></p>
+        <p>You should see <code>[DEBUG]</code> messages in the console showing:</p>
+        <ul>
+            <li><code>[DEBUG] loadPersona() started</code></li>
+            <li><code>[DEBUG] Scenario ID: friday-favor</code></li>
+            <li><code>[DEBUG] API response: {session_id: ...}</code></li>
+            <li><code>[DEBUG] addAlexMessageCard called with text: Hey. I'm literally about to head out...</code></li>
+        </ul>
+    </div>
+    
+    <h2>Step 4: Try Sending a Message</h2>
+    <div class="step">
+        <p>Type a message and press Enter. Watch the console for:</p>
+        <ul>
+            <li><code>[DEBUG] Chat response received: {alex_spoken_response: ...}</code></li>
+            <li><code>[DEBUG] About to call addAlexMessageCard with...</code></li>
+            <li><code>[DEBUG] Alex response message added</code></li>
+        </ul>
+    </div>
+    
+    <h2>What to Look For</h2>
+    <div class="important">
+        <p><strong>If you see <code>[ERROR]</code> messages:</strong></p>
+        <ul>
+            <li>Copy the full error message and share it with me</li>
+        </ul>
+        
+        <p><strong>If you see <code>[DEBUG] Timeline element: null</code>:</strong></p>
+        <ul>
+            <li>The chat-timeline div is missing from the HTML</li>
+        </ul>
+        
+        <p><strong>If debug logs stop at a certain point:</strong></p>
+        <ul>
+            <li>That indicates where the code is failing</li>
+        </ul>
+        
+        <p><strong>If you don't see ANY debug logs:</strong></p>
+        <ul>
+            <li>The JavaScript file isn't loading or being cached</li>
+            <li>Try a different browser</li>
+            <li>Make sure the server is running: <code>ps aux | grep uvicorn</code></li>
+        </ul>
+    </div>
+    
+    <h2>Server Status Check</h2>
+    <div class="step">
+        <p>Verify the server is running:</p>
+        <pre>cd ~/Desktop/difficult-conversations-multi-scenario
+ps aux | grep uvicorn</pre>
+        
+        <p>If not running, start it:</p>
+        <pre>cd ~/Desktop/difficult-conversations-multi-scenario
+python3 -m uvicorn agent:app --host 0.0.0.0 --port 8000 --reload</pre>
+    </div>
+    
+    <h2>Quick Backend Test</h2>
+    <div class="step">
+        <p>Test the backend directly (should work):</p>
+        <pre>curl -X POST http://localhost:8000/api/start-scenario \
+  -H "Content-Type: application/json" \
+  -d '{"scenario_id":"friday-favor"}'</pre>
+        
+        <p>You should see JSON with <code>session_id</code> and <code>opening_message</code>.</p>
+    </div>
+    
+    <p style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #444;">
+        <strong>After checking:</strong> Share what you see in the browser console - especially any [DEBUG] or [ERROR] messages, and I'll help identify the exact issue.
+    </p>
+</body>
+</html>

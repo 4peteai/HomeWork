@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Accessing Difficult Conversations</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            max-width: 700px;
+            margin: 60px auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #e0e0e0;
+        }
+        h1 { color: #7da3d3; margin-bottom: 30px; }
+        .link-box {
+            background: #2a2a2a;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #7da3d3;
+        }
+        a {
+            color: #7da3d3;
+            font-size: 18px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        a:hover { text-decoration: underline; }
+        .note {
+            background: #3a2a2a;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border-left: 4px solid #f44336;
+            font-size: 14px;
+        }
+        code {
+            background: #2a2a2a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: Monaco, monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>🙈 🙉 🙊 Difficult Conversations - Server Access</h1>
+    
+    <p>The server is running. Try these links in order:</p>
+    
+    <div class="link-box">
+        <strong>1. Localhost (standard):</strong><br>
+        <a href="http://localhost:8000/" target="_blank">http://localhost:8000/</a>
+    </div>
+    
+    <div class="link-box">
+        <strong>2. IP address (127.0.0.1):</strong><br>
+        <a href="http://127.0.0.1:8000/" target="_blank">http://127.0.0.1:8000/</a>
+    </div>
+    
+    <div class="link-box">
+        <strong>3. All interfaces (0.0.0.0):</strong><br>
+        <a href="http://0.0.0.0:8000/" target="_blank">http://0.0.0.0:8000/</a>
+    </div>
+    
+    <div class="note">
+        <strong>⚠️ If none of these work in your browser:</strong>
+        <ul>
+            <li>Try a different browser (Safari, Chrome, Firefox)</li>
+            <li>Disable any VPN or proxy</li>
+            <li>Check if antivirus/firewall is blocking localhost</li>
+            <li>Terminal shows server is working - this is a browser configuration issue</li>
+        </ul>
+        
+        <p><strong>Verify server in Terminal:</strong></p>
+        <code>curl http://localhost:8000/</code>
+        <p>If curl works but browser doesn't, it's a browser security/configuration issue.</p>
+    </div>
+    
+    <script>
+        // Auto-try first link after 2 seconds
+        setTimeout(() => {
+            console.log('Attempting to open http://localhost:8000/');
+        }, 2000);
+    </script>
+</body>
+</html>
