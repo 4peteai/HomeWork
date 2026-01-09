@@ -1,162 +1,184 @@
-# Difficult Conversations: AI-Powered Negotiation Training
+# 🐘 Grey - Difficult Conversations Training
 
-An agentic negotiation simulator designed to train professionals in difficult conversations with a defensive, stressed Senior Engineer named Alex. Built with a premium **Gemini 3-inspired dark mode interface** and powered by a 4-layer cognitive reasoning system.
+**"The conversation didn't fail. You just missed the elephant."**
+
+Grey is an AI-powered negotiation simulator that reveals the hidden dynamics in difficult workplace conversations. Unlike traditional communication training, Grey shows you **what they actually heard** and **what they didn't say** — the elephant in the room that makes or breaks real conversations.
+
+## 🎯 Core Philosophy
+
+Most conversations don't break because of bad intentions. They break in the gap between:
+- **What you said**
+- **What they actually heard**
+- **What stayed unspoken**
+
+Grey puts you inside that gap and shows you what you missed.
 
 ## 🚀 Key Features
 
-Unlike standard chatbots, this agent implements a **4-Layer Reasoning Loop** with distinct layers of cognition for every conversational turn:
+### **4-Layer Cognitive System**
 
-### 1. **Perception Layer**
-The agent first "hears" the user's input through a biased, emotional filter. For example:
-- User says: "Can we talk?"
-- Alex perceives: "Another vague meeting request wasting my time."
+Every conversational turn reveals four distinct layers of cognition:
 
-This models real-world communication breakdowns where intent ≠ interpretation.
+1. **👂 Alex Heard** (Perception Layer)
+   - How Alex interpreted your message through their biased, emotional filter
+   - Example: You say "Can we talk?" → Alex hears "Another vague meeting request wasting my time."
 
-### 2. **Inner Monologue**
-Alex generates hidden thoughts that drive the spoken response. These are raw, unfiltered emotions:
-- "Great, another fire drill. Why do I always get stuck cleaning up their mess?"
+2. **💭 Alex Thought** (Inner Monologue)
+   - Raw, unfiltered emotions driving Alex's response
+   - Example: "Great, another fire drill. Why do I always get stuck cleaning up their mess?"
 
-This layer reveals the psychological state influencing Alex's behavior, teaching users about emotional triggers.
+3. **💬 Alex Said** (Spoken Response)
+   - What Alex actually says out loud, staying in character
 
-### 3. **Spoken Response**
-What Alex actually says out loud, staying in character as a stressed, defensive engineer.
+4. **💡 Strategic Insight** (The Coach)
+   - Explains the psychological impact: "Your vagueness triggered Alex's anxiety about unknown commitments."
+   - Suggests high-level tactics: "Use a 'softener' to acknowledge their workload before making the ask."
+   - **Never provides scripts** — you must think strategically, not copy-paste phrases
 
-### 4. **Strategic Insight (The Coach)**
-A meta-layer that analyzes the conversation from a neutral perspective. The coach:
-- **Explains the 'Why'**: "Your vagueness triggered Alex's anxiety about unknown commitments."
-- **Suggests the 'How'**: "Use a 'softener' to acknowledge his workload before making the ask."
-- **Never provides scripts**: Forces users to think strategically, not copy-paste phrases.
+### **5 Relationship-Testing Scenarios**
 
-## 🎯 Advanced Features
+Grey features five conversations that pressure different fault lines in the same working relationship with Alex, your Tech Lead:
+
+1. **📅 Friday Favor**
+   - Trigger: Timing | Focus: Intent
+   - You need a favor. Alex is already done for the week.
+
+2. **⚡ Scope Change Under Pressure**
+   - Trigger: Overload | Focus: Balance
+   - You need Alex to take on more work. They already feel overloaded.
+
+3. **💔 Broken Promise**
+   - Trigger: Trust | Focus: Repair
+   - You didn't deliver what you promised. Alex is dealing with the fallout.
+
+4. **🚀 Security Blocker**
+   - Trigger: Risk | Focus: Navigation
+   - Progress is blocked because of perceived risk. Alex has the authority to stop everything.
+
+5. **💀 Uptime Standoff**
+   - Trigger: Accountability | Focus: Authority
+   - Acting now is risky. Waiting is costly. Alex doesn't want to own the downside.
+
+### **Character Continuity: One Relationship, Five Fault Lines**
+
+All scenarios feature the same character (Alex, Tech Lead) to create a continuous relationship arc. This design choice:
+- Mirrors real workplace relationships where the same person appears in different high-pressure contexts
+- Allows skills to compound across scenarios
+- Creates psychological continuity and deeper strategic learning
+
+### **Turn-Based Gamification System**
+
+Each scenario has a **Par Score** (optimal minimum turns to completion):
+- **Optimal Path**: Meet the par score in 1-3 turns
+- **Over Par**: Complete the scenario in more turns
+- **Completion Modal**: Shows your performance vs. optimal path with color-coded feedback
+
+### **AI-Generated Winning Explanations**
+
+When you successfully complete a scenario (100% goal alignment), the AI analyzes **what you specifically did** and generates a tactical explanation:
+
+Example:
+> "You acknowledged the timing issue upfront and offered a specific trade-off (pushing back the dashboard work). This reciprocity shifted the frame from 'demanding more' to 'negotiating fairly,' which preserved the relationship."
+
+This ensures every winning strategy is personalized to your actual conversation, not generic advice.
 
 ### **Director Mode: Goal Tracking & Off-Topic Detection**
-A Game Director monitors whether the user is actually attempting the negotiation scenario:
 
-- **`is_off_topic`**: Boolean flag detecting test messages, nonsense, or irrelevant input
-- **`goal_alignment_score`**: 0-100% progress meter toward successfully negotiating the scope change
-- **`director_warning`**: Stern intervention when users drift from the mission
+The Game Director monitors whether you're actually engaging with the scenario:
+- **`is_off_topic`**: Detects test messages, nonsense, or irrelevant input
+- **`goal_alignment_score`**: 0-100% progress toward successfully navigating the conversation
+- **`director_warning`**: Stern intervention when you drift from the mission
 
-**Example:**
-```
-User: "test you"
-Alex: "I don't have time for this. Do you actually need something or not?"
-Coach: ⚠️ MISSION WARNING - You are wasting Alex's time. Get back to negotiating the scope change immediately.
-Progress: 0% (RED)
-```
+### **Material Design 3 Interface**
 
-### **Mission Progress Bar**
-Visual feedback showing negotiation progress with color-coded states:
-- **Red (0-24%)**: No progress, stuck
-- **Orange (25-49%)**: Initial engagement
-- **Purple (50-74%)**: Active negotiation
-- **Green (75-100%)**: Near resolution
+Grey features a premium Material Design 3 dark mode interface:
+- **Surface containers** with subtle elevation (1-2dp)
+- **28px border radius** for cards and components
+- **M3 typography scale** with proper hierarchy
+- **Material Symbols Rounded** iconography
+- **Tonal color system** (no harsh contrasts)
+- **Responsive design** with mobile-optimized text (desktop: "Start Scenario" / mobile: "Start")
 
-### **Multi-Scenario Platform**
-The simulator supports multiple negotiation scenarios via dropdown selector:
-- **Scope Change Under Pressure** (default): PM requesting scope change mid-sprint
-- **Deadline Negotiation**: Discussing timeline extensions
-- **Resource Conflict**: Competing priorities
+## 🎨 Design System
 
-Each scenario maintains isolated session state with scenario-specific context cards.
-
-### **Whisper Design Pattern**
-Alex's inner thoughts and perceptions use a "whisper" visual metaphor:
-- **First Occurrence Labels**: "💭 Alex thought" and "👂 Alex heard" appear once, then switch to icon-only
-- **Italic Secondary Text**: Reduced opacity (62-65%) for hierarchy without overwhelming
-- **Inline Coaching**: 💡 icon appears next to user messages with tooltip-based strategic insights
-- **Typography Hierarchy**: Primary text (white, 15px) vs. whisper text (gray, italic, 14px)
-
-### **Typing Animation & Real-Time Feedback**
-- **Immediate User Bubble**: User message appears instantly when sent
-- **Typing Indicator**: Alex's avatar + 3 pulsing dots while waiting for API response
-- **Progressive Enhancement**: Perception appears under user bubble after API returns
-- **Auto-Scroll**: Timeline automatically scrolls to latest message
-
-## 🎨 UI Design Philosophy: "Gemini 3 Dark Mode"
-
-The interface draws inspiration from Google's Gemini 3 design language with:
-
-- **Deep Charcoal Background (#131314)**: Premium AI-native aesthetic
-- **Transparent Alex Bubbles**: Text sits directly on background for conversational flow
-- **Pill-Shaped User Messages (#2D2E2F)**: Muted blue-grey with generous padding
-- **Floating Capsule Input**: Elevated input field with shadow and rounded corners (border-radius: 100px)
-- **Minimalist Header**: 3-zone grid layout (Brand | Scenario Dropdown | Progress Widget)
-- **Typography-First Hierarchy**: Inter/Sans-serif with carefully tuned opacity levels
-- **Subtle Animations**: Calm bounce for typing dots, smooth fade-ins, no aggressive motion
-- **Strategic Insight Icon (💡)**: Minimalist tooltip-based coaching that doesn't interrupt flow
-
-### Design Tokens (CSS Variables)
+### Color Tokens
 ```css
---bg-body: #131314        /* Deep charcoal */
---bg-surface: #1E1F20     /* Input/header surface */
+--bg-body: #131314        /* Deep charcoal background */
+--bg-surface: #1E1F20     /* Card/header surface */
 --bg-user-bubble: #2D2E2F /* User message pill */
---text-primary: #E3E3E3   /* Off-white */
---text-secondary: #C4C7C5 /* Light gray */
---accent-color: #A8C7FA   /* Pale blue */
+--text-primary: #E3E3E3   /* Off-white primary text */
+--text-secondary: #C4C7C5 /* Light gray secondary text */
+--accent-color: #A8C7FA   /* Pale blue accents */
 --border-color: #444746   /* Subtle borders */
 ```
+
+### Typography Hierarchy
+- **Display Large**: 56px (homepage title)
+- **Title Large**: 36px (section headers)
+- **Title Medium**: 18px (card titles)
+- **Body Medium**: 16px (primary content)
+- **Body Small**: 14px (supporting text)
+- **Label**: 13px (metadata labels)
 
 ## 🛠 Tech Stack
 
 - **Backend**: Python 3.11+ with FastAPI
-- **AI**: OpenAI GPT-4 Turbo (JSON mode for structured outputs)
-- **Frontend**: Vanilla JavaScript, HTML5, CSS3 (no frameworks)
-- **Session Management**: In-memory dict keyed by UUID
-- **Deployment**: Docker-ready for Render.com
-- **Design**: Gemini 3-inspired dark mode with floating UI elements
+- **AI**: OpenAI GPT-4o (structured JSON outputs)
+- **Frontend**: Vanilla JavaScript, HTML5, CSS3
+- **Session Management**: In-memory UUID-keyed sessions
+- **Design**: Material Design 3 compliant
+- **Icons**: Material Symbols Rounded
+- **Typography**: Inter font family
 
-## 🏃‍♂️ How to Run
+## 🏃 Quick Start
 
 ### Local Development
 
-1. Clone the repo:
+1. **Clone the repository**:
 ```bash
 git clone <repo-url>
-cd first-attempt-2f8d
+cd grey-conversations
 ```
 
-2. Set your OpenAI API key:
+2. **Set your OpenAI API key**:
 ```bash
 export OPENAI_API_KEY="sk-..."
 ```
 
-3. Install dependencies:
+3. **Install dependencies**:
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Run the server:
+4. **Run the server**:
 ```bash
-python3 -m uvicorn agent:app --host 0.0.0.0 --port 8000
+python3 -m uvicorn agent:app --host 0.0.0.0 --port 5000
 ```
 
-5. Open your browser:
+5. **Open your browser**:
 ```
-http://localhost:8000
+http://localhost:5000
 ```
 
 ### Using Docker
 
 ```bash
-docker build -t alex-agent .
-docker run -p 10000:10000 -e OPENAI_API_KEY="sk-..." alex-agent
+docker build -t grey-conversations .
+docker run -p 10000:10000 -e OPENAI_API_KEY="sk-..." grey-conversations
 ```
 
 Then visit `http://localhost:10000`
 
 ### Deployment to Render.com
 
-The included `Dockerfile` is optimized for Render:
-
 1. **Push to GitHub**:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit: Difficult Conversations Simulator"
-   git remote add origin <your-github-repo-url>
-   git push -u origin main
-   ```
+```bash
+git init
+git add .
+git commit -m "Initial commit: Grey - Difficult Conversations Training"
+git remote add origin <your-github-repo-url>
+git push -u origin main
+```
 
 2. **Create Web Service on Render**:
    - Go to [Render Dashboard](https://dashboard.render.com/)
@@ -169,51 +191,53 @@ The included `Dockerfile` is optimized for Render:
 
 3. **Add Environment Variable**:
    - In Render dashboard, go to "Environment"
-   - Add: `OPENAI_API_KEY` = `sk-...` (your OpenAI API key)
+   - Add: `OPENAI_API_KEY` = `sk-...`
 
 4. **Deploy**:
    - Click "Create Web Service"
-   - Render will automatically build and deploy
    - Access your app at `https://your-app-name.onrender.com`
+
+## 📂 Project Structure
+
+```
+.
+├── agent.py                 # FastAPI backend + OpenAI GPT-4o integration
+├── scenarios.json           # 5 scenario definitions with triggers/skills/par scores
+├── templates/
+│   ├── home.html           # Homepage with Zero Card + scenario grid
+│   ├── scenario.html       # Conversation interface with 4-layer display
+│   └── index.html          # Legacy template (deprecated)
+├── static/
+│   ├── style.css           # Material Design 3 dark mode styling
+│   ├── scenario.js         # Conversation logic, typing animation, completion modal
+│   └── favicon.svg         # 🐘 elephant favicon
+├── requirements.txt         # Python dependencies
+├── Dockerfile              # Production deployment config
+└── README.md               # This file
+```
 
 ## 🧠 Architecture Decisions
 
-### **The "Strategic Coach" (Not a Scriptwriter)**
+### **Strategic Coaching, Not Scripts**
 
-I designed the coaching system to provide **strategic insights** rather than **copy-paste scripts**. 
+The coaching system provides **strategic insights** rather than **copy-paste scripts**.
 
-**Why?** 
-- Scripts create dependency: users don't learn communication principles
-- Strategy forces active learning: users must think about *why* their approach failed
-- Generalization: strategic thinking transfers to new situations
+**Why?**
+- Scripts create dependency and prevent learning
+- Strategy forces active thinking about communication principles
+- Transferable skills that generalize to new situations
 
 **How it works:**
-The system prompt explicitly forbids the AI from providing example phrases. Instead, it must:
+The system prompt explicitly forbids the AI from providing example phrases:
 1. Explain the psychological impact ("Your vagueness triggered anxiety")
 2. Suggest high-level tactics ("Use a 'softener' to acknowledge workload")
 
-### **Perception as Translation Layer**
+### **100% Goal Alignment Required**
 
-The "Alex heard" block appears directly under the user's message (not under Alex's response). This creates a visual metaphor:
-
-```
-[User's Message]
-   ↓
-[How Alex Twisted It] ← Translation/Distortion Layer
-   ↓
-[Alex's Response]
-```
-
-This makes communication breakdown *visible* and educational.
-
-### **Session State Management**
-
-The application maintains:
-- **Conversation History**: Full chat log sent to GPT-4 for context continuity
-- **Session Isolation**: Each browser session gets a unique UUID
-- **Stateless Backend**: Sessions stored in-memory (scalable to Redis/DB for production)
-
-Alex can "remember" earlier interactions, hold grudges, or gradually de-escalate based on cumulative behavior.
+Scenarios only complete when `goal_alignment_score == 100`:
+- No partial credit (removed 75% threshold from earlier versions)
+- Forces users to fully navigate the conversation
+- AI generates personalized winning explanation only at 100%
 
 ### **Punchy, Raw Language**
 
@@ -223,69 +247,44 @@ Early versions used academic language:
 Current version uses gut reactions:
 - ✅ "Another last-minute request dumped on me."
 
-**Why?** Raw language is:
-- Faster to read
-- More emotionally impactful
-- Closer to how people actually think
+**Why?** Raw language is faster to read, more emotionally impactful, and closer to how people actually think.
 
-### **Visual Hierarchy & Accessibility**
+### **Zero Card: The Intro Pattern**
 
-- **Alex Avatar**: 32px circular badge with "A" initial, dark background + border
-- **User Messages**: Right-aligned, 80% max-width, pill-shaped bubbles
-- **Alex Messages**: Left-aligned, transparent background (text on page background)
-- **Context Card**: Centered system pill with "CONTEXT" label, transparent background with border
-- **Progress Widget**: Compact bar (100px × 6px) with color-coded states:
-  - **Red (0-24%)**: No progress
-  - **Orange (25-49%)**: Initial engagement
-  - **Purple (50-74%)**: Active negotiation
-  - **Green (75-100%)**: Near resolution
-
-## 📂 Project Structure
-
-```
-.
-├── agent.py                 # FastAPI backend + OpenAI integration
-├── persona.json             # Alex's personality configuration
-├── templates/
-│   └── index.html           # Frontend UI structure
-├── static/
-│   ├── style.css            # Gemini 3 dark mode styling
-│   └── script.js            # Frontend logic (async, animations, tooltips)
-├── requirements.txt         # Python dependencies
-├── Dockerfile               # Production deployment config
-├── .env                     # API key storage (git-ignored)
-└── README.md                # This file
-```
+The homepage features a "Zero Card" — an intro card that sits in the same grid as scenario cards:
+- Same dimensions and styling as scenario cards
+- No CTA, no background image, no trigger/focus labels
+- Left-aligned text with M3 typography hierarchy
+- Establishes context before user chooses a scenario
 
 ## 🎓 Educational Philosophy
 
-This simulator is based on the principle that **negotiation is pattern recognition**:
+Grey is based on the principle that **negotiation is pattern recognition**:
 
-1. **Identify the emotional state** (stressed, defensive, rushed)
+1. **Identify emotional state** (stressed, defensive, rushed)
 2. **Adapt communication style** (acknowledge constraints, show empathy)
-3. **Track progress** (Am I moving toward resolution or escalation?)
+3. **Track progress** (moving toward resolution or escalation?)
 
-By forcing users to analyze *why* their message failed (not just *what* to say instead), the system builds transferable communication skills.
+By forcing users to analyze *why* their message failed (not just *what* to say instead), Grey builds transferable communication skills.
 
 ## 🔮 Future Enhancements
 
-- **Multiple Active Scenarios**: Backend support for scenario switching (currently frontend-only)
-- **Additional Personas**: Passive-aggressive PM, perfectionist designer, burned-out QA engineer
-- **Stress Meter Visualization**: Real-time graph showing Alex's emotional state over time
+- **Additional Personas**: Passive-aggressive PM, perfectionist designer, burned-out QA
+- **Stress Meter Visualization**: Real-time emotional state graph
 - **Conversation Branching**: Critical decision points with multiple strategic paths
-- **Export Transcript**: Download conversation history for review/training
-- **Difficulty Levels**: Beginner (more forgiving) to Expert (hair-trigger emotional responses)
-- **Mobile Optimization**: Enhanced touch interactions and responsive design refinements
-- **Persistent Sessions**: Redis/PostgreSQL for session persistence across deployments
+- **Export Transcript**: Download conversation history for review
+- **Difficulty Levels**: Beginner (forgiving) to Expert (hair-trigger responses)
+- **Persistent Sessions**: Redis/PostgreSQL for cross-deployment continuity
+- **Mobile App**: Native iOS/Android versions
 
 ## 📄 License
 
-MIT License - Feel free to use for training, education, or research.
+MIT License - Free to use for training, education, or research.
 
 ## 🤝 Contributing
 
-This is a demonstration project, but suggestions for improving the coaching logic or adding new personas are welcome!
+Suggestions for improving coaching logic, adding new scenarios, or enhancing the AI reasoning system are welcome!
 
 ---
 
-**Built with ❤️ for better workplace communication**
+**🐘 Built for better workplace communication**

@@ -1,0 +1,139 @@
+{
+  "scenarios": [
+    {
+      "id": "friday-favor",
+      "emoji": "📅",
+      "icon": "calendar_today",
+      "title": "Friday Favor",
+      "trigger_emotion": "Timing",
+      "key_skill": "Intent",
+      "theme_color": "#2c3440",
+      "par_score": 2,
+      "winning_explanation": "By being honest about your constraints instead of making excuses, you respected Alex's intelligence and protected your boundaries. This transparency reduces long-term friction and builds trust.",
+      "short_description": "You need a favor. Alex is already done for the week.",
+      "full_description": "You need Alex's help with something that isn't strictly urgent. It could wait, but postponing it will create complications for you later. Alex is clearly wrapping up work and not eager to take on anything new right now.",
+      "character": {
+        "name": "Alex",
+        "role": "Tech Lead",
+        "traits": ["protective of work-life balance", "efficient", "values honesty", "dislikes manipulation", "weekend plans"]
+      },
+      "scenario_context": "User needs Alex's help on Friday at 4 PM",
+      "user_goal": "Get Alex to help you today without damaging the relationship",
+      "completion_threshold": 75,
+      "opening_message": {
+        "alex_spoken_response": "Hey. I'm literally about to head out. What's up?",
+        "alex_inner_thought": "It's Friday afternoon. If this is another 'quick favor' that takes two hours, I'm going to lose it.",
+        "alex_perception": "N/A (Initial State)",
+        "coaching_tip": "Alex is in 'Weekend Mode' and resents being asked. Be vulnerable about your personal need and acknowledge their boundaries."
+      }
+    },
+    {
+      "id": "scope-change",
+      "emoji": "⚡",
+      "icon": "bolt",
+      "title": "Scope Change Under Pressure",
+      "trigger_emotion": "Overload",
+      "key_skill": "Balance",
+      "theme_color": "#3d3a2f",
+      "par_score": 2,
+      "winning_explanation": "You offered a concrete trade-off instead of just asking for more work. This reciprocity shifted Alex's mental frame from 'being used' to 'negotiating a fair deal,' which preserves your working relationship.",
+      "short_description": "You need Alex to take on more work. They already feel overloaded.",
+      "full_description": "You need Alex to take on additional work. Alex already has a full workload and feels stretched thin. From their point of view, expectations keep increasing without enough relief.",
+      "character": {
+        "name": "Alex",
+        "role": "Tech Lead",
+        "traits": ["defensive", "autonomous", "dislikes bureaucracy", "highly skilled", "stressed"]
+      },
+      "scenario_context": "User is asking Alex for scope change on tight deadline",
+      "user_goal": "Negotiate scope change without angering Alex",
+      "completion_threshold": 75,
+      "opening_message": {
+        "alex_spoken_response": "I saw your meeting request. Look, I'm right in the middle of deployment. Is this urgent?",
+        "alex_inner_thought": "Great, another interruption from product management. I need to nip this in the bud before it derails my entire day.",
+        "alex_perception": "N/A (Initial State)",
+        "coaching_tip": "Alex is currently in a 'High Focus' state. Be concise and acknowledge the timing issue to build rapport."
+      }
+    },
+    {
+      "id": "broken-promise",
+      "emoji": "💔",
+      "icon": "favorite",
+      "title": "Broken Promise",
+      "trigger_emotion": "Trust",
+      "key_skill": "Repair",
+      "theme_color": "#3d2f32",
+      "par_score": 1,
+      "winning_explanation": "You skipped empty apologies and immediately offered a costly sacrifice. This demonstrated accountability through action, not words—the only currency that rebuilds broken trust.",
+      "short_description": "You didn't deliver what you promised. Alex is dealing with the fallout.",
+      "full_description": "You promised Alex you'd deliver test coverage for a critical module by a specific date. That deadline passed. Alex committed to stakeholders based on your word, and the delay has made them look unreliable. The technical debt is now blocking their team's sprint.",
+      "character": {
+        "name": "Alex",
+        "role": "Tech Lead",
+        "traits": ["collaborative", "trusting (until burned)", "stakeholder-focused", "fair but firm", "values reliability"]
+      },
+      "scenario_context": "User missed a technical deadline, and Alex is now exposed to stakeholders",
+      "user_goal": "Rebuild trust and salvage the relationship",
+      "completion_threshold": 75,
+      "opening_message": {
+        "alex_spoken_response": "So... still no test coverage? I told the VP we'd have the module ready for review today.",
+        "alex_inner_thought": "I went out on a limb for them, and now I look incompetent. I'm not making that mistake again.",
+        "alex_perception": "N/A (Initial State)",
+        "coaching_tip": "Alex is in 'Betrayed Trust' mode. Skip apologies and immediately offer a costly sacrifice to restore credibility."
+      }
+    },
+    {
+      "id": "marketing-blocker",
+      "emoji": "🚀",
+      "icon": "rocket_launch",
+      "title": "Security Blocker",
+      "trigger_emotion": "Risk",
+      "key_skill": "Navigation",
+      "theme_color": "#2d3631",
+      "par_score": 3,
+      "winning_explanation": "You proposed a limited workaround that gave Alex control while achieving your goal. This creative reframing satisfied their need for authority without forcing direct confrontation.",
+      "short_description": "Progress is blocked because of perceived risk. Alex has the authority to stop everything.",
+      "full_description": "You need to ship a new feature, but Alex has the authority to block releases that feel risky or unclear. They're cautious, process-driven, and personally responsible if something goes wrong in production. Your feature touches user data in a way that makes Alex uncomfortable.",
+      "character": {
+        "name": "Alex",
+        "role": "Tech Lead",
+        "traits": ["risk-averse", "formal", "authority-driven", "procedural", "protective of system stability"]
+      },
+      "scenario_context": "User's feature is blocked by Alex for security review",
+      "user_goal": "Ship the feature without escalating conflict or bypassing Alex",
+      "completion_threshold": 75,
+      "opening_message": {
+        "alex_spoken_response": "I reviewed your PR. I'm blocking this—we can't ship user data changes without proper audit logging.",
+        "alex_inner_thought": "They always want to move fast and break things. If this causes a data breach, it's my head on the line, not theirs.",
+        "alex_perception": "N/A (Initial State)",
+        "coaching_tip": "Alex is in 'Risk Aversion' mode. Avoid direct pushback and propose a limited workaround that gives them control."
+      }
+    },
+    {
+      "id": "uptime-standoff",
+      "emoji": "💀",
+      "icon": "skull",
+      "title": "Uptime Standoff",
+      "trigger_emotion": "Accountability",
+      "key_skill": "Authority",
+      "theme_color": "#352f3d",
+      "par_score": 2,
+      "winning_explanation": "You invoked shared accountability and higher authority to shift Alex's risk calculation. By reframing inaction as the bigger threat, you changed the decision from 'safe vs. risky' to 'which risk is worse.'",
+      "short_description": "Acting now is risky. Waiting is costly. Alex doesn't want to own the downside.",
+      "full_description": "A production bug is costing the company significant money every hour. The fix is ready, but deploying during peak traffic carries real risk. Alex has the authority and technical expertise to execute the deployment, but they'll be blamed if anything goes wrong. From their perspective, waiting until off-hours is safer.",
+      "character": {
+        "name": "Alex",
+        "role": "Tech Lead",
+        "traits": ["cautious", "process-oriented", "fears blame", "technically excellent", "conflict-averse"]
+      },
+      "scenario_context": "User needs Alex to deploy a critical fix during peak hours",
+      "user_goal": "Get Alex to deploy today without damaging the relationship",
+      "completion_threshold": 75,
+      "opening_message": {
+        "alex_spoken_response": "I saw your deploy request. You want to push this... right now? During peak traffic?",
+        "alex_inner_thought": "If this goes sideways, I'm the one who gets blamed for the outage. Not happening.",
+        "alex_perception": "N/A (Initial State)",
+        "coaching_tip": "Alex is in 'Fear of Blame' mode. Don't reassure—show that NOT deploying is riskier. Invoke shared accountability or higher authority."
+      }
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grey - Practice</title>
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="home-page">
+    <div class="home-container">
+        <header class="home-header">
+            <h1 class="home-title">🐘 Grey</h1>
+            <p class="home-subtitle">The conversation didn't fail. You just missed the elephant.</p>
+        </header>
+
+        <div class="scenarios-grid">
+            <div class="zero-card">
+                <p class="zero-core">🐘Grey reveals the Elephant in the Room — <strong>what they actually heard</strong>, and <strong>what they didn't say</strong>.</p>
+                <p class="zero-supporting">Most conversations don't break because of bad intentions. They break in the gap between what you said, what they actually heard, and what stayed unspoken.</p>
+                <p class="zero-action">You don't practice better phrasing. You see the motives, the impact — and deal with it.</p>
+            </div>
+            {% for scenario in scenarios %}
+            <div class="scenario-card {% if completed.get(scenario.id) %}completed{% endif %}">
+                <div class="scenario-header">
+                    <div class="scenario-icon-badge">
+                        <span class="material-symbols-rounded">{{ scenario.icon }}</span>
+                    </div>
+                    {% if completed.get(scenario.id) %}
+                    <div class="completion-badge">✓ Completed</div>
+                    {% endif %}
+                </div>
+                
+                <h2 class="scenario-title">{{ scenario.title }}</h2>
+                <p class="scenario-description">{{ scenario.short_description }}</p>
+                
+                <div class="scenario-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Trigger</span>
+                        <span class="meta-value">{{ scenario.trigger_emotion }}</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Focus</span>
+                        <span class="meta-value">{{ scenario.key_skill }}</span>
+                    </div>
+                </div>
+                
+                <a href="/scenario/{{ scenario.id }}" class="scenario-button">
+                    {% if completed.get(scenario.id) %}
+                    <span class="button-text-desktop">Replay Scenario</span><span class="button-text-mobile">Replay</span>
+                    {% else %}
+                    <span class="button-text-desktop">Start Scenario</span><span class="button-text-mobile">Start</span>
+                    {% endif %}
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <footer class="home-footer">
+            <p>Each scenario teaches a unique negotiation skill through realistic AI-powered roleplay.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('scenario-dropdown').addEventListener('change', function(e) {
+            if (e.target.value) {
+                window.location.href = '/scenario/' + e.target.value;
+            }
+        });
+    </script>
+</body>
+</html>

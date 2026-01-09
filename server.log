@@ -1,0 +1,93 @@
+INFO:     Started server process [80113]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+INFO:     127.0.0.1:54424 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54545 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54545 - "GET /style.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54545 - "GET /style.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54548 - "GET /apple-touch-icon-precomposed.png HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54548 - "GET /apple-touch-icon.png HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54545 - "GET /scenario/scope-change HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54545 - "GET /scenario.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54545 - "POST /api/start-scenario HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54545 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54561 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54546 - "GET /scenario/marketing-blocker HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54546 - "POST /api/start-scenario HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54575 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54580 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54598 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54633 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54650 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54676 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54676 - "GET /style.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54676 - "GET /style.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54943 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54943 - "GET /style.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54943 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54943 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54955 - "GET /scenario/friday-favor HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54955 - "GET /scenario.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54955 - "POST /api/start-scenario HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54955 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55116 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55116 - "GET /style.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:55522 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55522 - "GET /style.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56105 - "GET /scenario/friday-favor HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56105 - "GET /style.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56106 - "GET /scenario.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56105 - "POST /api/start-scenario HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56113 - "GET /scenario/scope-change HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56113 - "POST /api/start-scenario HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56113 - "GET /scenario/marketing-blocker HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56113 - "POST /api/start-scenario HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56113 - "GET /scenario/uptime-standoff HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56113 - "POST /api/start-scenario HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56363 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57683 - "GET /scenario/uptime-standoff HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57683 - "GET /style.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57702 - "GET /scenario.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57702 - "POST /api/start-scenario HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57702 - "GET /favicon.svg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58053 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58053 - "GET /style.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58053 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58059 - "GET /scenario/marketing-blocker HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58059 - "GET /scenario.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:58059 - "POST /api/start-scenario HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58059 - "GET /favicon.svg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58059 - "GET /scenario/marketing-blocker HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58059 - "POST /api/start-scenario HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58059 - "GET /scenario/marketing-blocker HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58059 - "POST /api/start-scenario HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58059 - "GET /scenario/marketing-blocker HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58059 - "POST /api/start-scenario HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58084 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58133 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58133 - "GET /style.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58133 - "GET /favicon.svg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58133 - "GET /scenario/marketing-blocker HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58133 - "GET /scenario.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58133 - "POST /api/start-scenario HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58146 - "GET /scenario/uptime-standoff HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58146 - "POST /api/start-scenario HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58200 - "GET /scenario/uptime-standoff HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58200 - "POST /api/start-scenario HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58200 - "GET /scenario/uptime-standoff HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58200 - "POST /api/start-scenario HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58200 - "GET /scenario/uptime-standoff HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58200 - "POST /api/start-scenario HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58200 - "GET /scenario/uptime-standoff HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58200 - "POST /api/start-scenario HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58200 - "GET /scenario/uptime-standoff HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58200 - "POST /api/start-scenario HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58280 - "GET /api/scenario/uptime-standoff HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58284 - "GET /api/scenario/uptime-standoff HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58289 - "GET /api/scenario/uptime-standoff HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58300 - "GET /scenario/uptime-standoff HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [80113]

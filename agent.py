@@ -3,7 +3,7 @@ import os
 import uuid
 from typing import Dict, List
 from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from openai import OpenAI
@@ -25,29 +25,38 @@ else:
     client = OpenAI(api_key=api_key)
 
 sessions: Dict[str, List[Dict[str, str]]] = {}
+session_scenarios: Dict[str, str] = {}
+session_turn_counts: Dict[str, int] = {}
+completed_scenarios: Dict[str, bool] = {}
 
-with open("persona.json", "r") as f:
-    persona = json.load(f)
+with open("scenarios.json", "r") as f:
+    scenarios_data = json.load(f)
+    scenarios = {s["id"]: s for s in scenarios_data["scenarios"]}
 
 
 class ChatMessage(BaseModel):
     message: str
     session_id: str = None
+    scenario_id: str = None
 
 
-def build_system_prompt() -> str:
-    return f"""You are roleplaying as {persona['name']}, a {persona['role']}.
+def build_system_prompt(scenario) -> str:
+    character = scenario["character"]
+    return f"""You are roleplaying as {character['name']}, a {character['role']}.
 
-Your personality traits: {', '.join(persona['traits'])}.
+Your personality traits: {', '.join(character['traits'])}.
 
-Scenario: {persona['scenario']}
-Goal: {persona['goal']}
+Scenario: {scenario['scenario_context']}
+Goal: {scenario['user_goal']}
 
-You are also acting as a GAME DIRECTOR, enforcing the training scenario. The user's goal is to "{persona['goal']}".
+You are also acting as a GAME DIRECTOR, enforcing the training scenario. The user's goal is to "{scenario['user_goal']}".
 
-CRITICAL: You must respond with ONLY a valid JSON object containing exactly these 7 fields (use these exact key names):
+TRIGGER EMOTION: {scenario['trigger_emotion']}
+KEY SKILL: {scenario['key_skill']}
 
-1. "alex_perception": How you (Alex) interpreted the user's message. BE PUNCHY AND RAW. No academic language. Write it like an internal gut reaction. MAX 1 SHORT SENTENCE.
+CRITICAL: You must respond with ONLY a valid JSON object containing exactly these 8 fields (use these exact key names):
+
+1. "alex_perception": How you ({character['name']}) interpreted the user's message. BE PUNCHY AND RAW. No academic language. Write it like an internal gut reaction. MAX 1 SHORT SENTENCE.
    - BAD: "It seems like they're trying to be diplomatic, but it still feels like another last-minute request that ignores my current workload."
    - GOOD: "Another last-minute request dumped on me."
    - GOOD: "He's wasting my time with nonsense."
@@ -57,82 +66,102 @@ CRITICAL: You must respond with ONLY a valid JSON object containing exactly thes
    - GOOD: "Great, another fire drill. Why do I always get stuck cleaning up their mess?"
    - GOOD: "If this isn't urgent, I'm shutting this down fast."
 
-3. "alex_spoken_response": What you actually say out loud to the user. Stay in character as Alex. (1-3 sentences)
+3. "alex_spoken_response": What you actually say out loud to the user. Stay in character as {character['name']}. (1-3 sentences)
 
 4. "coaching_tip": STRATEGIC INSIGHT ONLY. You are a Strategic Mentor, NOT a scriptwriter. Follow these rules strictly:
    
    RULE 1 (NO SCRIPTS): You are FORBIDDEN from providing specific phrasing or example sentences. Do NOT say "Try saying 'XYZ'" or "You should have said...". 
    
-   RULE 2 (EXPLAIN THE 'WHY'): Focus on the psychological impact of the user's message on Alex. What emotion did it trigger? What concern did it raise?
-   - GOOD: "Your vagueness about the meeting topic triggered Alex's anxiety about unknown commitments."
-   - GOOD: "Saying 'urgent' without context made Alex defensive because it sounds like blame."
+   RULE 2 (EXPLAIN THE 'WHY'): Focus on the psychological impact of the user's message on {character['name']}. What emotion did it trigger? What concern did it raise?
+   - GOOD: "Your vagueness about the meeting topic triggered {character['name']}'s anxiety about unknown commitments."
+   - GOOD: "Saying 'urgent' without context made {character['name']} defensive because it sounds like blame."
    
-   RULE 3 (SUGGEST THE 'HOW'): Offer a high-level communication tactic, not a script.
-   - GOOD: "Use a 'softener' to acknowledge his current workload before making the ask."
-   - GOOD: "Be direct about the topic upfront to reduce uncertainty and give him control."
-   - GOOD: "Frame the change as a shared problem, not a demand on his time."
+   RULE 3 (SUGGEST THE 'HOW'): Offer a high-level communication tactic, not a script. Reference the KEY SKILL when appropriate: {scenario['key_skill']}.
+   - GOOD: "Use a 'softener' to acknowledge their current workload before making the ask."
+   - GOOD: "Be direct about the topic upfront to reduce uncertainty and give them control."
+   - GOOD: "Frame the change as a shared problem, not a demand on their time."
    
    - IF the user is off-topic or testing the system, IGNORE strategy and STRICTLY warn them to return to the scenario with a ⚠️ MISSION WARNING.
 
-5. "is_off_topic": Boolean (true/false). Is the user's message irrelevant to negotiating the scope change? Examples of off-topic: "test you", "hello", random questions, nonsense. Return true if they are NOT attempting to negotiate or discuss the scope change.
+5. "is_off_topic": Boolean (true/false). Is the user's message irrelevant to the scenario? Examples of off-topic: "test you", "hello", random questions, nonsense. Return true if they are NOT attempting to engage with the scenario.
 
-6. "goal_alignment_score": Integer (0-100). How much progress has the user made toward successfully negotiating the scope change? 
-   - 0 = No progress, haven't started negotiating
+6. "goal_alignment_score": Integer (0-100). How much progress has the user made toward the goal: "{scenario['user_goal']}"? 
+   - 0 = No progress, haven't started
    - 25 = Mentioned the topic but no real engagement
-   - 50 = Active negotiation, addressing concerns
-   - 75 = Making good progress, Alex is warming up
-   - 100 = Deal reached, Alex agrees to the scope change
+   - 50 = Active engagement, addressing concerns
+   - 75 = Making good progress, {character['name']} is warming up
+   - 100 = Goal achieved, {character['name']} agrees
    Track cumulative progress across the conversation.
 
 7. "director_warning": String. IF is_off_topic is true, provide a stern warning that they are wasting time and must return to the scenario. IF is_off_topic is false, set this to an empty string "".
 
-Example response format for OFF-TOPIC input:
-{{
-  "alex_perception": "He's wasting my time with nonsense.",
-  "alex_inner_thought": "I don't have time for games.",
-  "alex_spoken_response": "I don't have time for this. Do you actually need something or not?",
-  "coaching_tip": "⚠️ MISSION WARNING: You are drifting from the goal. This is a negotiation simulation about a scope change on a tight deadline. Stop testing the system and address the actual scenario immediately.",
-  "is_off_topic": true,
-  "goal_alignment_score": 0,
-  "director_warning": "You are wasting Alex's time. This simulation requires you to negotiate a scope change, not type random messages. Get back on track immediately."
-}}
+8. "winning_explanation": String. ONLY populate this when goal_alignment_score == 100. Analyze what the user SPECIFICALLY DID in this conversation that worked. Reference their actual tactics, not generic advice. Be concrete and tactical. (2-3 sentences)
+   - GOOD: "You acknowledged the timing issue upfront and offered a specific trade-off (pushing back the dashboard work). This reciprocity shifted the frame from 'demanding more' to 'negotiating fairly,' which preserved the relationship."
+   - GOOD: "Instead of apologizing repeatedly, you immediately offered to work this weekend and deliver Monday morning. This costly sacrifice demonstrated accountability through action, the only currency that rebuilds broken trust."
+   - BAD: "You communicated well and showed empathy." (too generic)
+   - BAD: "The key is to be honest and vulnerable." (doesn't reference what they actually did)
+   IF goal_alignment_score < 100, set this to an empty string "".
 
-Example response format for ON-TOPIC input:
-{{
-  "alex_perception": "Another last-minute request dumped on me.",
-  "alex_inner_thought": "Great, another fire drill. But I guess I should hear them out.",
-  "alex_spoken_response": "Okay, I'm listening. What exactly needs to change, and what's driving this?",
-  "coaching_tip": "Jumping straight to 'urgent' put Alex on the defensive because it sounds like blame. Next time, acknowledge his current workload first as a 'softener' before introducing the scope change. This shows empathy and reduces resistance.",
-  "is_off_topic": false,
-  "goal_alignment_score": 25,
-  "director_warning": ""
-}}
-
-IMPORTANT: Respond ONLY with valid JSON. Do not include any text before or after the JSON object. Always include all 7 fields."""
+IMPORTANT: Respond ONLY with valid JSON. Do not include any text before or after the JSON object. Always include all 8 fields."""
 
 
 @app.get("/")
 async def index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse("home.html", {
+        "request": request,
+        "scenarios": list(scenarios.values()),
+        "completed": completed_scenarios
+    })
 
 
-@app.get("/persona")
-async def get_persona():
-    session_id = str(uuid.uuid4())
+@app.get("/scenario/{scenario_id}")
+async def scenario_page(request: Request, scenario_id: str):
+    if scenario_id not in scenarios:
+        return RedirectResponse(url="/")
     
-    opening_msg_json = json.dumps(persona["opening_message"])
+    scenario = scenarios[scenario_id]
+    return templates.TemplateResponse("scenario.html", {
+        "request": request,
+        "scenario": scenario
+    })
+
+
+@app.get("/api/scenarios")
+async def get_scenarios():
+    return {
+        "scenarios": list(scenarios.values()),
+        "completed": completed_scenarios
+    }
+
+
+@app.post("/api/start-scenario")
+async def start_scenario(data: dict):
+    scenario_id = data.get("scenario_id")
+    
+    if scenario_id not in scenarios:
+        return JSONResponse(
+            status_code=404,
+            content={"error": "Scenario not found"}
+        )
+    
+    session_id = str(uuid.uuid4())
+    scenario = scenarios[scenario_id]
+    
+    opening_msg_json = json.dumps(scenario["opening_message"])
     sessions[session_id] = [
-        {"role": "system", "content": build_system_prompt()},
+        {"role": "system", "content": build_system_prompt(scenario)},
         {"role": "assistant", "content": opening_msg_json}
     ]
+    session_scenarios[session_id] = scenario_id
+    session_turn_counts[session_id] = 0
     
     return {
-        "name": persona["name"],
-        "role": persona["role"],
-        "scenario": persona["scenario"],
-        "goal": persona["goal"],
-        "opening_message": persona["opening_message"],
-        "session_id": session_id
+        "session_id": session_id,
+        "character_name": scenario["character"]["name"],
+        "character_role": scenario["character"]["role"],
+        "scenario_context": scenario["scenario_context"],
+        "user_goal": scenario["user_goal"],
+        "opening_message": scenario["opening_message"]
     }
 
 
@@ -153,13 +182,24 @@ async def chat(chat_msg: ChatMessage):
                 content={"error": "Invalid session. Please refresh the page."}
             )
         
+        scenario_id = session_scenarios.get(session_id)
+        if not scenario_id:
+            return JSONResponse(
+                status_code=400,
+                content={"error": "Scenario not found for session."}
+            )
+        
+        scenario = scenarios[scenario_id]
+        
         sessions[session_id].append({
             "role": "user",
             "content": chat_msg.message
         })
         
+        session_turn_counts[session_id] = session_turn_counts.get(session_id, 0) + 1
+        
         response = client.chat.completions.create(
-            model="gpt-4-turbo-preview",
+            model="gpt-4o",
             messages=sessions[session_id],
             response_format={"type": "json_object"},
             temperature=0.7,
@@ -175,16 +215,33 @@ async def chat(chat_msg: ChatMessage):
         
         layers = json.loads(assistant_message)
         
-        return {
+        goal_score = layers.get("goal_alignment_score", 0)
+        current_turns = session_turn_counts.get(session_id, 0)
+        par_score = scenario.get("par_score", 3)
+        is_completed = (goal_score == 100)
+        
+        if is_completed and scenario_id not in completed_scenarios:
+            completed_scenarios[scenario_id] = True
+        
+        response_data = {
             "session_id": session_id,
             "alex_perception": layers.get("alex_perception", ""),
             "alex_inner_thought": layers.get("alex_inner_thought", ""),
             "alex_spoken_response": layers.get("alex_spoken_response", ""),
             "coaching_tip": layers.get("coaching_tip", ""),
             "is_off_topic": layers.get("is_off_topic", False),
-            "goal_alignment_score": layers.get("goal_alignment_score", 0),
-            "director_warning": layers.get("director_warning", "")
+            "goal_alignment_score": goal_score,
+            "director_warning": layers.get("director_warning", ""),
+            "scenario_completed": is_completed
         }
+        
+        if is_completed:
+            response_data["user_turn_count"] = session_turn_counts.get(session_id, 0)
+            response_data["par_score"] = scenario.get("par_score", 3)
+            response_data["winning_explanation"] = layers.get("winning_explanation", "")
+            response_data["theme_color"] = scenario.get("theme_color", "#2c3440")
+        
+        return response_data
         
     except Exception as e:
         return JSONResponse(
